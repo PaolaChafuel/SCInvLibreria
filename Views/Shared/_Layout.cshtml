@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Librería Inventario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">📚 Librería Inventario</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" asp-controller="Libros" asp-action="Index">Libros</a></li>
+        <li class="nav-item"><a class="nav-link" asp-controller="Proveedores" asp-action="Index">Proveedores</a></li>
+        <li class="nav-item"><a class="nav-link" asp-controller="Ventas" asp-action="Index">Ventas</a></li>
+        <li class="nav-item"><a class="nav-link" asp-controller="Reportes" asp-action="VentasMensuales">Reportes</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<main class="container py-4">
+@if (TempData["Ok"] is string ok) { <div class="alert alert-success alert-dismissible fade show">@ok<button class="btn-close" data-bs-dismiss="alert"></button></div> }
+@if (TempData["Error"] is string er) { <div class="alert alert-danger alert-dismissible fade show">@er<button class="btn-close" data-bs-dismiss="alert"></button></div> }
+@RenderBody()
+</main>
+<footer class="border-top py-3 text-center text-muted"><small>Sistema de Control de Inventario para Librería · ASP.NET Core MVC</small></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

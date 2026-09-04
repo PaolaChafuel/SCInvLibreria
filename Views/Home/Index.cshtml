@@ -1,0 +1,20 @@
+@{ ViewData["Title"] = "Inicio"; var bajoStock = ViewBag.BajoStock as List<Libro> ?? new(); }
+<div class="p-4 mb-4 bg-light rounded-3 border">
+  <h1 class="display-6 fw-bold">Sistema de Control de Inventario</h1>
+  <p class="lead mb-0">Administra libros, proveedores y ventas, con control automático de stock y reportes mensuales.</p>
+</div>
+<div class="row g-3 mb-4">
+  <div class="col-md-3"><div class="card shadow-sm h-100"><div class="card-body"><div class="text-muted">Libros registrados</div><div class="display-6">@ViewBag.TotalLibros</div></div></div></div>
+  <div class="col-md-3"><div class="card shadow-sm h-100"><div class="card-body"><div class="text-muted">Proveedores</div><div class="display-6">@ViewBag.TotalProveedores</div></div></div></div>
+  <div class="col-md-3"><div class="card shadow-sm h-100"><div class="card-body"><div class="text-muted">Unidades vendidas</div><div class="display-6">@ViewBag.TotalVentas</div></div></div></div>
+  <div class="col-md-3"><div class="card shadow-sm h-100"><div class="card-body"><div class="text-muted">Stock total</div><div class="display-6">@ViewBag.StockTotal</div></div></div></div>
+</div>
+<div class="d-flex gap-2 flex-wrap mb-4">
+ <a class="btn btn-primary" asp-controller="Ventas" asp-action="Create">Registrar venta</a>
+ <a class="btn btn-outline-primary" asp-controller="Libros" asp-action="Create">Nuevo libro</a>
+ <a class="btn btn-outline-secondary" asp-controller="Reportes" asp-action="VentasMensuales">Ver reporte mensual</a>
+</div>
+<div class="card shadow-sm"><div class="card-header fw-semibold">Libros con stock bajo (≤ 5)</div><div class="card-body p-0">
+@if (!bajoStock.Any()) { <div class="p-3 text-muted">No hay alertas de stock bajo.</div> }
+else { <div class="table-responsive"><table class="table table-striped mb-0"><thead><tr><th>Título</th><th>Autor</th><th>Stock</th></tr></thead><tbody>@foreach(var l in bajoStock){<tr><td>@l.Titulo</td><td>@l.Autor</td><td><span class="badge bg-danger">@l.Stock</span></td></tr>}</tbody></table></div> }
+</div></div>

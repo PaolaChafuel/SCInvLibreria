@@ -1,0 +1,7 @@
+html { font-size: 14px; }
+@media (min-width: 768px) { html { font-size: 16px; } }
+body { background: #f8f9fa; }
+.card { border: 0; }
+.table td, .table th { vertical-align: middle; }
+.field-validation-error { color: #dc3545; }
+.input-validation-error { border-color: #dc3545; }

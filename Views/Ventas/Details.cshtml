@@ -1,0 +1,3 @@
+@model Venta
+@{ ViewData["Title"] = "Detalle venta"; }
+<h2>Detalle de venta</h2><div class="card shadow-sm"><div class="card-body"><dl class="row"><dt class="col-sm-3">Fecha</dt><dd class="col-sm-9">@Model.Fecha.ToString("dd/MM/yyyy")</dd><dt class="col-sm-3">Libro</dt><dd class="col-sm-9">@Model.Libro?.Titulo</dd><dt class="col-sm-3">Cantidad</dt><dd class="col-sm-9">@Model.Cantidad</dd><dt class="col-sm-3">Precio unitario</dt><dd class="col-sm-9">@Model.PrecioUnitario.ToString("C")</dd><dt class="col-sm-3">Total</dt><dd class="col-sm-9 fw-bold">@Model.Total.ToString("C")</dd></dl><a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a> <a asp-action="Index" class="btn btn-secondary">Volver</a></div></div>

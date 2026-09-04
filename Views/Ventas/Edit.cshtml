@@ -1,0 +1,7 @@
+@model Venta
+@{ ViewData["Title"] = "Editar venta"; }
+<h2>Editar venta</h2><div class="alert alert-info">Al editar una venta, el sistema devuelve temporalmente el stock original y descuenta la nueva cantidad.</div><div class="card shadow-sm"><div class="card-body"><form asp-action="Edit"><input type="hidden" asp-for="Id"/><partial name="_Form" model="Model"/><button class="btn btn-primary">Guardar cambios</button> <a asp-action="Index" class="btn btn-secondary">Cancelar</a></form></div></div>
+@section Scripts { <script>
+async function mostrarStock(){ const id=document.getElementById('LibroId').value; if(!id||id==='0') return; const r=await fetch('/Ventas/ObtenerLibro?id='+id); if(!r.ok) return; const d=await r.json(); document.getElementById('stockInfo').textContent='Stock actual: '+d.stock+' (la validación considera la venta original).'; }
+document.getElementById('LibroId').addEventListener('change', mostrarStock); document.addEventListener('DOMContentLoaded', mostrarStock);
+</script> }

@@ -1,0 +1,3 @@
+@model Proveedor
+@{ ViewData["Title"] = "Nuevo proveedor"; }
+<h2>Nuevo proveedor</h2><div class="card shadow-sm"><div class="card-body"><form asp-action="Create"><partial name="_Form" model="Model"/><button class="btn btn-primary">Guardar</button> <a asp-action="Index" class="btn btn-secondary">Cancelar</a></form></div></div>

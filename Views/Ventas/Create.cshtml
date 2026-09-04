@@ -1,0 +1,7 @@
+@model Venta
+@{ ViewData["Title"] = "Registrar venta"; }
+<h2>Registrar venta</h2><div class="card shadow-sm"><div class="card-body"><form asp-action="Create"><partial name="_Form" model="Model"/><button class="btn btn-primary">Guardar venta</button> <a asp-action="Index" class="btn btn-secondary">Cancelar</a></form></div></div>
+@section Scripts { <script>
+async function cargarLibro(){ const id=document.getElementById('LibroId').value; if(!id||id==='0') return; const r=await fetch('/Ventas/ObtenerLibro?id='+id); if(!r.ok) return; const d=await r.json(); document.getElementById('PrecioUnitario').value=d.precio; document.getElementById('stockInfo').textContent='Stock disponible: '+d.stock; }
+document.getElementById('LibroId').addEventListener('change', cargarLibro); document.addEventListener('DOMContentLoaded', cargarLibro);
+</script> }

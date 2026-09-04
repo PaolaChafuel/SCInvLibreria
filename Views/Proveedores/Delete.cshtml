@@ -1,0 +1,3 @@
+@model Proveedor
+@{ ViewData["Title"] = "Eliminar proveedor"; }
+<h2>Eliminar proveedor</h2><div class="alert alert-warning">¿Seguro que deseas eliminar este proveedor? Si tiene libros asociados, el sistema bloqueará la operación.</div><div class="card shadow-sm"><div class="card-body"><p><strong>@Model.Nombre</strong> — @Model.Ruc</p><form asp-action="Delete"><input type="hidden" asp-for="Id"/><button class="btn btn-danger">Eliminar</button> <a asp-action="Index" class="btn btn-secondary">Cancelar</a></form></div></div>

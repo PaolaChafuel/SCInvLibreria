@@ -1,0 +1,3 @@
+@model Libro
+@{ ViewData["Title"] = "Eliminar libro"; }
+<h2>Eliminar libro</h2><div class="alert alert-warning">¿Seguro que deseas eliminar <strong>@Model.Titulo</strong>? Si existen ventas asociadas, el sistema bloqueará la operación.</div><form asp-action="Delete"><input type="hidden" asp-for="Id"/><button class="btn btn-danger">Eliminar</button> <a asp-action="Index" class="btn btn-secondary">Cancelar</a></form>

@@ -1,0 +1,3 @@
+@model Venta
+@{ ViewData["Title"] = "Eliminar venta"; }
+<h2>Eliminar venta</h2><div class="alert alert-warning">Al eliminar esta venta, se devolverán <strong>@Model.Cantidad</strong> unidades al stock de <strong>@Model.Libro?.Titulo</strong>.</div><form asp-action="Delete"><input type="hidden" asp-for="Id"/><button class="btn btn-danger">Eliminar venta</button> <a asp-action="Index" class="btn btn-secondary">Cancelar</a></form>

@@ -1,0 +1,3 @@
+@model Libro
+@{ ViewData["Title"] = "Detalle libro"; }
+<h2>Detalle del libro</h2><div class="card shadow-sm"><div class="card-body"><dl class="row"><dt class="col-sm-3">Título</dt><dd class="col-sm-9">@Model.Titulo</dd><dt class="col-sm-3">Autor</dt><dd class="col-sm-9">@Model.Autor</dd><dt class="col-sm-3">ISBN</dt><dd class="col-sm-9">@Model.Isbn</dd><dt class="col-sm-3">Proveedor</dt><dd class="col-sm-9">@Model.Proveedor?.Nombre</dd><dt class="col-sm-3">Stock</dt><dd class="col-sm-9">@Model.Stock</dd><dt class="col-sm-3">Precio</dt><dd class="col-sm-9">@Model.Precio.ToString("C")</dd></dl><a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a> <a asp-action="Index" class="btn btn-secondary">Volver</a></div></div>

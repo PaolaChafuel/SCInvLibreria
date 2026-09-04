@@ -1,0 +1,3 @@
+@model Proveedor
+@{ ViewData["Title"] = "Detalle proveedor"; }
+<h2>Detalle del proveedor</h2><div class="card shadow-sm"><div class="card-body"><dl class="row"><dt class="col-sm-3">Nombre</dt><dd class="col-sm-9">@Model.Nombre</dd><dt class="col-sm-3">RUC / Identificación</dt><dd class="col-sm-9">@Model.Ruc</dd><dt class="col-sm-3">Email</dt><dd class="col-sm-9">@Model.Email</dd><dt class="col-sm-3">Teléfono</dt><dd class="col-sm-9">@Model.Telefono</dd><dt class="col-sm-3">Dirección</dt><dd class="col-sm-9">@Model.Direccion</dd><dt class="col-sm-3">Libros asociados</dt><dd class="col-sm-9">@Model.Libros.Count</dd></dl><a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a> <a asp-action="Index" class="btn btn-secondary">Volver</a></div></div>

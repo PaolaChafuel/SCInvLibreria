@@ -1,0 +1,313 @@
+@model SCInvLibreria.ViewModels.ReporteMensualViewModel
+
+@{
+    ViewData["Title"] = "Reporte de ventas";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+
+        <div>
+            <h2 class="mb-1">
+                Reporte de libros vendidos
+            </h2>
+
+            <div class="text-muted">
+                Desde
+                <strong>
+                    @Model.FechaDesde.ToString("dd/MM/yyyy")
+                </strong>
+
+                hasta
+
+                <strong>
+                    @Model.FechaHasta.ToString("dd/MM/yyyy")
+                </strong>
+            </div>
+        </div>
+
+        <button type="button"
+                class="btn btn-outline-secondary"
+                onclick="window.print()">
+            Imprimir
+        </button>
+
+    </div>
+
+
+    <!-- FILTRO DE FECHAS -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+            <strong>
+                Seleccionar rango del reporte
+            </strong>
+        </div>
+
+        <div class="card-body">
+
+            <form asp-controller="Reportes"
+                  asp-action="VentasMensuales"
+                  method="get">
+
+                <div class="row g-3">
+
+                    <div class="col-md-4">
+
+                        <label class="form-label">
+                            Fecha desde
+                        </label>
+
+                        <input type="date"
+                               name="fechaDesde"
+                               value="@Model.FechaDesde.ToString("yyyy-MM-dd")"
+                               class="form-control"
+                               required />
+
+                    </div>
+
+
+                    <div class="col-md-4">
+
+                        <label class="form-label">
+                            Fecha hasta
+                        </label>
+
+                        <input type="date"
+                               name="fechaHasta"
+                               value="@Model.FechaHasta.ToString("yyyy-MM-dd")"
+                               class="form-control"
+                               required />
+
+                    </div>
+
+
+                    <div class="col-md-4 d-flex align-items-end">
+
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+                            Generar reporte
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <div asp-validation-summary="All"
+                 class="text-danger mt-3">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TARJETAS DE RESUMEN -->
+
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <div class="text-muted">
+                        Títulos diferentes
+                    </div>
+
+                    <div class="display-6">
+                        @Model.Detalles.Count
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <div class="text-muted">
+                        Unidades vendidas
+                    </div>
+
+                    <div class="display-6">
+                        @Model.TotalLibrosVendidos
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <div class="text-muted">
+                        Total vendido
+                    </div>
+
+                    <div class="display-6">
+                        $ @Model.TotalVentas.ToString("N2")
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- BOTONES -->
+
+    <div class="d-flex justify-content-end gap-2 mb-3">
+
+        <button type="button"
+                class="btn btn-outline-secondary"
+                onclick="window.print()">
+            Imprimir
+        </button>
+
+        <a asp-controller="Reportes"
+           asp-action="DescargarVentas"
+           asp-route-fechaDesde="@Model.FechaDesde.ToString("yyyy-MM-dd")"
+           asp-route-fechaHasta="@Model.FechaHasta.ToString("yyyy-MM-dd")"
+           class="btn btn-success">
+
+            Descargar reporte
+
+        </a>
+
+    </div>
+
+
+    <!-- TABLA -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <strong>
+                Detalle de ventas
+            </strong>
+
+        </div>
+
+
+        <div class="table-responsive">
+
+            <table class="table table-striped table-hover mb-0">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>
+                            Libro
+                        </th>
+
+                        <th>
+                            Autor
+                        </th>
+
+                        <th class="text-end">
+                            Cantidad
+                        </th>
+
+                        <th class="text-end">
+                            Total
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    @if (!Model.Detalles.Any())
+                    {
+                        <tr>
+
+                            <td colspan="4"
+                                class="text-center py-4 text-muted">
+
+                                No existen ventas dentro del rango seleccionado.
+
+                            </td>
+
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.Detalles)
+                        {
+                            <tr>
+
+                                <td>
+                                    @item.Titulo
+                                </td>
+
+                                <td>
+                                    @item.Autor
+                                </td>
+
+                                <td class="text-end">
+                                    @item.CantidadVendida
+                                </td>
+
+                                <td class="text-end">
+                                    $ @item.TotalVendido.ToString("N2")
+                                </td>
+
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+
+
+                <tfoot class="table-light">
+
+                    <tr class="fw-bold">
+
+                        <td colspan="2">
+                            TOTAL
+                        </td>
+
+                        <td class="text-end">
+                            @Model.TotalLibrosVendidos
+                        </td>
+
+                        <td class="text-end">
+                            $ @Model.TotalVentas.ToString("N2")
+                        </td>
+
+                    </tr>
+
+                </tfoot>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
